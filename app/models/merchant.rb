@@ -3,6 +3,8 @@ class Merchant < ApplicationRecord
   has_many :order_items, through: :items
   has_many :orders, through: :order_items
   has_many :users
+  has_many :discounts
+  
 
   validates_presence_of :name,
                         :address,
@@ -10,7 +12,7 @@ class Merchant < ApplicationRecord
                         :state,
                         :zip
 
-  def item_count
+def item_count
     items.count
   end
 

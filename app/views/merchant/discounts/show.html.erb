@@ -1,0 +1,26 @@
+<h1 align = "center"> Discount: <%=@discount.id %></h1>
+<section id="Discount table">
+  <center>
+  <table>
+    <tr>
+      <th>Discount ID</th>
+      <th>Name</th>
+      <th>Percent Off</th>
+      <th>Number of Items</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+        <section id="discount-<%=@discount.id%>">
+          <tr>
+            <td><%=@discount.id %></td>
+            <td><%=@discount.name %></td>
+            <td><%=@discount.percent %>%</td>
+            <td><%=@discount.id %></td>
+            <td><%= link_to 'Edit', edit_merchant_discount_path(@discount) %></td>
+            <td><%= link_to 'Delete', merchant_discount_path(@discount), method: :delete %></td>
+
+          </tr>
+        </section>
+  </table>
+
+</section>

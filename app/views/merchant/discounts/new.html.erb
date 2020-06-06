@@ -1,0 +1,22 @@
+<h1>New Discount</h1>
+
+<section id="new-discount-form">
+  <%= form_for [@merchant, @discount] do |f| %>
+    <%= f.label :quantity %>
+    <%= f.text_field :quantity %> 
+  
+    <%= f.label :description %>
+    <%= f.text_field :description %> 
+  
+    <%= f.label :image %>
+    <%= f.text_field :image %> 
+  
+    <%= f.label :price %>
+    <%= f.number_field :price, min: 1 %> 
+  
+    <%= f.label :inventory %>
+    <%= f.number_field :inventory, min: 1 %> 
+  
+    <%= f.submit %>
+  <% end %>
+</section>

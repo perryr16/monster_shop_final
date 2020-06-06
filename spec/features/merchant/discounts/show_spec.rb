@@ -9,7 +9,7 @@ RSpec.describe 'New Discount' do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@m_user)
   end
 
-  it "US2 Discount Index Page" do
+  it "US3 Discount Index Page" do
     visit merchant_discounts_path
     click_link(@discount1.name)
     expect(current_path).to eq(merchant_discount_path(@discount1))
@@ -23,4 +23,4 @@ RSpec.describe 'New Discount' do
     end
 
   end
-end#final
+end #final

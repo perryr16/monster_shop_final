@@ -1,0 +1,13 @@
+<h1>Edit Discount <%=@discount.id %></h1>
+
+<section id="edit-discount-<%=@discount.id%>">
+  <%= form_for [@merchant, @discount] do |f| %>
+    <%= f.label :quantity %>
+    <%= f.number_field :quantity, min: 1 %> 
+  
+    <%= f.label :percent %>
+    <%= f.number_field :percent, min: 1 %> 
+
+    <%= f.submit %>
+  <% end %>
+</section>

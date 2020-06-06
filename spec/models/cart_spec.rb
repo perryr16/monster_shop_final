@@ -7,10 +7,11 @@ RSpec.describe Cart do
       @brian = Merchant.create!(name: 'Brians Bagels', address: '125 Main St', city: 'Denver', state: 'CO', zip: 80218)
       @ogre = @megan.items.create!(name: 'Ogre', description: "I'm an Ogre!", price: 20, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 5 )
       @giant = @megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 2 )
+      @elf = @megan.items.create!(name: 'Elf', description: "I'm an elf!", price: 30, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 2 )
       @hippo = @brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
       @cart = Cart.new({
         @ogre.id.to_s => 1,
-        @giant.id.to_s => 2
+        @giant.id.to_s => 2,
         })
     end
 
@@ -41,6 +42,10 @@ RSpec.describe Cart do
 
     it '.grand_total' do
       expect(@cart.grand_total).to eq(120)
+      @discount20 = @megan.discounts.create!(quantity: 2, percent: 20)
+      @discount30 = @megan.discounts.create!(quantity: 2, percent: 30)
+      expect(@cart.grand_total).to eq(90)
+      
     end
 
     it '.count_of()' do
@@ -51,6 +56,10 @@ RSpec.describe Cart do
     it '.subtotal_of()' do
       expect(@cart.subtotal_of(@ogre.id)).to eq(20)
       expect(@cart.subtotal_of(@giant.id)).to eq(100)
+      @discount20 = @megan.discounts.create!(quantity: 2, percent: 20)
+      @discount30 = @megan.discounts.create!(quantity: 2, percent: 30)
+      expect(@cart.subtotal_of(@ogre.id)).to eq(20)
+      expect(@cart.subtotal_of(@giant.id)).to eq(70)
     end
 
     it '.limit_reached?()' do
@@ -62,6 +71,25 @@ RSpec.describe Cart do
       @cart.less_item(@giant.id.to_s)
 
       expect(@cart.count_of(@giant.id)).to eq(1)
+    end
+
+    it '.active_discount()'do
+      @discount20 = @megan.discounts.create!(quantity: 2, percent: 20)
+      @discount30 = @megan.discounts.create!(quantity: 2, percent: 30)
+      expect(@cart.active_discount(@ogre.id)).to eq(nil)
+      expect(@cart.active_discount(@giant.id)).to eq(@discount30)
+    end
+    it '.discount_price()'do
+      @discount20 = @megan.discounts.create!(quantity: 2, percent: 20)
+      @discount30 = @megan.discounts.create!(quantity: 2, percent: 30)
+      expect(@cart.discount_price(@ogre.id)).to eq(20)
+      expect(@cart.discount_price(@giant.id)).to eq(35)
+    end
+    it '.discount_subtotal()'do
+      @discount20 = @megan.discounts.create!(quantity: 2, percent: 20)
+      @discount30 = @megan.discounts.create!(quantity: 2, percent: 30)
+      expect(@cart.discount_subtotal(@ogre.id)).to eq(20)
+      expect(@cart.discount_subtotal(@giant.id)).to eq(70)
     end
   end
 end

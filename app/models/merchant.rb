@@ -12,7 +12,7 @@ class Merchant < ApplicationRecord
                         :state,
                         :zip
 
-  def item_count
+def item_count
     items.count
   end
 

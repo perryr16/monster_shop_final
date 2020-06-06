@@ -27,7 +27,7 @@ RSpec.describe 'New Discount' do
     expect(page).to have_content("Discount #{@discount1.id} has been updated")   
   end
 
-  it "US1:II mechant can edit a discount: failure" do
+  it "US4:II mechant can edit a discount: failure" do
 
     visit edit_merchant_discount_path(@discount1)
 
@@ -51,6 +51,22 @@ RSpec.describe 'New Discount' do
     expect(current_path).to eq(edit_merchant_discount_path(@discount1)) 
     expect(page).to have_content("Please enter a valid percent")   
   end
+
+  it "links to edit from show and index" do
+    visit merchant_discounts_path
+    within("#discount-#{@discount1.id}")do
+      click_link("Edit") 
+    end
+    expect(current_path).to eq(edit_merchant_discount_path(@discount1))
+    
+    visit merchant_discount_path(@discount1)
+    within("#discount-#{@discount1.id}")do
+      click_link("Edit") 
+    end
+    expect(current_path).to eq(edit_merchant_discount_path(@discount1))
+    
+  end
+  
 
   
   

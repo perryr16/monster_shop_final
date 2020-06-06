@@ -42,6 +42,14 @@ class Merchant::DiscountsController < Merchant::BaseController
     end
   end
   
+  def destroy
+    # discount = Discount.find(params[:id])
+    Discount.destroy(params[:id])
+    flash[:notice] = "Discount #{params[:id]} has been deleted"
+    redirect_to merchant_discounts_path
+  end
+  
+  
   
 
   private

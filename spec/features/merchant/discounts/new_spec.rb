@@ -5,7 +5,6 @@ RSpec.describe 'New Discount' do
     @merchant1 = create(:merchant)
     @m_user = create(:user, name: "merchant user", role: 1, merchant_id: @merchant1.id)
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@m_user)
-
   end
 
   it "US1:I merchant can create a new discount success" do

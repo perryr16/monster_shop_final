@@ -10,7 +10,7 @@ class Merchant::DiscountsController < Merchant::BaseController
   
   def new
     @merchant = current_user.merchant
-    @discount = @merchant.discounts.new
+    @discount = Discount.new
   end
 
   def create
@@ -43,15 +43,11 @@ class Merchant::DiscountsController < Merchant::BaseController
   end
   
   def destroy
-    # discount = Discount.find(params[:id])
     Discount.destroy(params[:id])
     flash[:notice] = "Discount #{params[:id]} has been deleted"
     redirect_to merchant_discounts_path
   end
   
-  
-  
-
   private
 
   def discount_params

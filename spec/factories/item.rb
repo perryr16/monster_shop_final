@@ -4,7 +4,7 @@ FactoryBot.define do
     sequence(:description) {|n| "Description #{n}" }
     sequence(:price, (1..100).cycle) { |n| 1 + n }
     sequence(:image) { |n| "http://img.com/#{1 + n}" }
-    active? { true }
+    active { true }
     sequence(:inventory, (1..100).cycle) { |n| 1 + n }
     merchant
   end

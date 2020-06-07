@@ -48,9 +48,6 @@ class Merchant::DiscountsController < Merchant::BaseController
     redirect_to merchant_discounts_path
   end
   
-  
-  
-
   private
 
   def discount_params

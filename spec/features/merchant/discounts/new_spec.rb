@@ -8,7 +8,8 @@ RSpec.describe 'New Discount' do
   end
 
   it "US1:I merchant can create a new discount success" do
-    visit new_merchant_discount_path
+    visit "/merchant/discounts/new"
+    
     expect(current_path).to eq('/merchant/discounts/new')
 
     within("#new-discount-form")do
@@ -23,13 +24,13 @@ RSpec.describe 'New Discount' do
     expect(discount.percent).to eq(50)
     expect(discount.name).to eq("50% off 5 items")
 
-    expect(current_path).to eq(merchant_discounts_path) 
+    expect(current_path).to eq("/merchant/discounts") 
     expect(page).to have_content("The #{discount.name} discount has been created")   
   end
 
   it "US1:II merchant can't create discount if bad or missing fields" do
 
-    visit new_merchant_discount_path
+    visit "/merchant/discounts/new"
     expect(current_path).to eq('/merchant/discounts/new')
 
     within("#new-discount-form")do
@@ -38,10 +39,10 @@ RSpec.describe 'New Discount' do
 
       click_on "Create Discount"
     end
-    expect(current_path).to eq(new_merchant_discount_path) 
+    expect(current_path).to eq("/merchant/discounts/new") 
     expect(page).to have_content("Please enter a valid quantity, percent")
 
-    expect(current_path).to eq(new_merchant_discount_path) 
+    expect(current_path).to eq("/merchant/discounts/new") 
     expect(page).to have_content("Please enter a valid quantity, percent")
 
     within("#new-discount-form")do
@@ -50,7 +51,7 @@ RSpec.describe 'New Discount' do
 
       click_on "Create Discount"
     end
-    expect(current_path).to eq(new_merchant_discount_path) 
+    expect(current_path).to eq("/merchant/discounts/new") 
     expect(page).to have_content("Please enter a valid percent")
 
     within("#new-discount-form")do
@@ -60,7 +61,7 @@ RSpec.describe 'New Discount' do
       click_on "Create Discount"
     end
     discount = Discount.last
-    expect(current_path).to eq(merchant_discounts_path) 
+    expect(current_path).to eq("/merchant/discounts") 
     expect(page).to have_content("The #{discount.name} discount has been created")   
     
   end

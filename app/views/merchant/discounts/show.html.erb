@@ -16,9 +16,9 @@
             <td><%=@discount.name %></td>
             <td><%=@discount.percent %>%</td>
             <td><%=@discount.id %></td>
-            <td><%= link_to 'Edit', edit_merchant_discount_path(@discount) %></td>
-            <td><%= link_to 'Delete', merchant_discount_path(@discount), method: :delete %></td>
-
+            <td><%= link_to 'Edit', "/merchant/discounts/#{@discount.id}/edit" %></td>
+            <td><%= link_to 'Delete', "/merchant/discounts/#{@discount.id}", method: :delete %></td>
+             
           </tr>
         </section>
   </table>

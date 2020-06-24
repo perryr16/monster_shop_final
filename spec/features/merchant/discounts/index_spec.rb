@@ -36,7 +36,7 @@ RSpec.describe 'New Discount' do
       click_link(@discount3.name)
     end
 
-    expect(current_path).to eq(merchant_discount_path(@discount3))
+    expect(current_path).to eq("/merchant/discounts/#{@discount3.id}")
   end
 
 end #final

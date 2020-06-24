@@ -10,9 +10,11 @@ RSpec.describe 'New Discount' do
   end
 
   it "US3 Discount Index Page" do
-    visit merchant_discounts_path
+    # visit merchant_discounts_path
+    visit "/merchant/discounts"
     click_link(@discount1.name)
-    expect(current_path).to eq(merchant_discount_path(@discount1))
+    # expect(current_path).to eq(merchant_discount_path(@discount1))
+    expect(current_path).to eq("/merchant/discounts/#{@discount1.id}")
 
     within("#discount-#{@discount1.id}")do
       expect(page).to have_content(@discount1.id)

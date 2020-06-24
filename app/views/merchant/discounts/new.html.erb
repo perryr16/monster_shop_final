@@ -1,7 +1,7 @@
 <h1>New Discount</h1>
 
 <section id="new-discount-form">
-  <%= form_for [@merchant, @discount] do |f| %>
+  <%= form_for [@merchant, @discount], url: "/merchant/discounts" do |f| %>
     <%= f.label :quantity %>
     <%= f.number_field :quantity, min: 1 %> 
   

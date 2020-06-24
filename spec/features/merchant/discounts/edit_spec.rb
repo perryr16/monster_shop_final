@@ -9,7 +9,7 @@ RSpec.describe 'New Discount' do
   end
 
   it "US4:I merchant can create a edit discount: success" do
-    visit edit_merchant_discount_path(@discount1)
+    visit "/merchant/discounts/#{@discount1.id}/edit"
 
     within("#edit-discount-#{@discount1.id}")do
       fill_in "discount[quantity]", with: 10
@@ -29,7 +29,7 @@ RSpec.describe 'New Discount' do
 
   it "US4:II mechant can edit a discount: failure" do
 
-    visit edit_merchant_discount_path(@discount1)
+    visit "/merchant/discounts/#{@discount1.id}/edit"
 
     within("#edit-discount-#{@discount1.id}")do
       fill_in "discount[quantity]", with: ""
@@ -38,7 +38,7 @@ RSpec.describe 'New Discount' do
       click_on "Update Discount"
     end
 
-    expect(current_path).to eq(edit_merchant_discount_path(@discount1)) 
+    expect(current_path).to eq("/merchant/discounts/#{@discount1.id}/edit") 
     expect(page).to have_content("Please enter a valid quantity, percent")   
 
     within("#edit-discount-#{@discount1.id}")do
@@ -48,22 +48,22 @@ RSpec.describe 'New Discount' do
       click_on "Update Discount"
     end
 
-    expect(current_path).to eq(edit_merchant_discount_path(@discount1)) 
+    expect(current_path).to eq("/merchant/discounts/#{@discount1.id}/edit") 
     expect(page).to have_content("Please enter a valid percent")   
   end
 
   it "links to edit from show and index" do
-    visit merchant_discounts_path
+    visit "/merchant/discounts"
     within("#discount-#{@discount1.id}")do
       click_link("Edit") 
     end
-    expect(current_path).to eq(edit_merchant_discount_path(@discount1))
+    expect(current_path).to eq("/merchant/discounts/#{@discount1.id}/edit")
     
-    visit merchant_discount_path(@discount1)
+    visit "/merchant/discounts/#{@discount1.id}"
     within("#discount-#{@discount1.id}")do
       click_link("Edit") 
     end
-    expect(current_path).to eq(edit_merchant_discount_path(@discount1))
+    expect(current_path).to eq("/merchant/discounts/#{@discount1.id}/edit")
     
   end
   

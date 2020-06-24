@@ -27,9 +27,9 @@ RSpec.describe "apply discount in cart" do
 
   it "US6 add enough items to triger a discount" do
 
-    visit item_path(@item1)
+    visit "/items/#{@item1.id}"
     click_on "Add to Cart"
-    visit item_path(@item2)
+    visit "/items/#{@item2.id}"
     click_on "Add to Cart"
     
     visit cart_path
@@ -58,15 +58,15 @@ RSpec.describe "apply discount in cart" do
   end
 
   it "US6 having many individual items will not trigger discount" do
-    visit item_path(@item1)
+    visit "/items/#{@item1.id}"
     click_on "Add to Cart"
-    visit item_path(@item3)
+    visit "/items/#{@item3.id}"
     click_on "Add to Cart"
-    visit item_path(@item4)
+    visit "/items/#{@item4.id}"
     click_on "Add to Cart"
-    visit item_path(@item5)
+    visit "/items/#{@item5.id}"
     click_on "Add to Cart"
-    visit item_path(@item6)
+    visit "/items/#{@item6.id}"
     click_on "Add to Cart"
 
     visit cart_path

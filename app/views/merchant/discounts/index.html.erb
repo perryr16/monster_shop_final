@@ -1,5 +1,5 @@
 <h1 align = "center"> Discount Index</h1>
-<%= link_to 'New Discount', new_merchant_discount_path %>
+<%= link_to 'New Discount', "/merchant/discounts/new" %>
 <section id="Discount table">
   <center>
   <table>
@@ -16,11 +16,11 @@
             <section id="discount-<%=discount.id%>">
               <tr>
                 <td><%=discount.id %></td>
-                <td><%= link_to discount.name, merchant_discount_path(discount) %></td>
+                <td><%= link_to discount.name, "/merchant/discounts/#{discount.id}" %></td>
                 <td><%=discount.percent %>%</td>
                 <td><%=discount.id %></td>
-                <td><%= link_to 'Edit', edit_merchant_discount_path(discount) %></td>
-                <td><%= link_to 'Delete', merchant_discount_path(discount), method: :delete %></td>
+                <td><%= link_to 'Edit', "/merchant/discounts/#{discount.id}/edit" %></td>
+                <td><%= link_to 'Delete', "/merchant/discounts/#{discount.id}", method: :delete %></td>
               </tr>
             </section>
             <%end %>

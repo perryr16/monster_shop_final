@@ -2,9 +2,6 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get :root, to: 'welcome#index'
 
-  # resources :merchants do
-  #   resources :items, only: [:index]
-  # end
   get '/merchants', to: 'merchants#index'
   get '/merchants/new', to: 'merchants#new'
   post '/merchants', to: 'merchants#create'
@@ -16,15 +13,12 @@ Rails.application.routes.draw do
   get '/merchants/:merchant_id/items', to: 'items#index'
 
 
-  # resources :items, only: [:index, :show] do
-  #    resources :reviews, only: [:new, :create]
-  # end
   get '/items', to: 'items#index'
   get '/items/:id', to: 'items#show'
   get '/items/:item_id/reviews/new', to: 'reviews#new'
   post '/items/:item_id/reviews', to: 'reviews#create'
 
-  # resources :reviews, only: [:edit, :update, :destroy]
+
   get '/reviews/:id/edit', to: 'reviews#edit'
   patch '/reviews/:id', to: 'reviews#update'
   delete '/items/review/:id', to: 'reviews#destroy'
@@ -36,7 +30,7 @@ Rails.application.routes.draw do
   delete '/cart/:item_id', to: 'cart#remove_item'
 
   get '/registration', to: 'users#new', as: :registration
-  # resources :users, only: [:create, :update]
+
   post '/users', to: 'users#create', as: :users
   patch '/user/:id', to: 'users#update', as: :user
   get '/profile', to: 'users#show'
@@ -60,7 +54,7 @@ Rails.application.routes.draw do
     get '/items/:id/edit', to: 'items#edit'
     patch '/items/:id', to: 'items#update'
     delete '/items/:id', to: 'items#destroy'
-    # resources :discounts 
+
     get '/discounts', to: 'discounts#index'
     get '/discounts/new', to: 'discounts#new'
     get '/discounts/:id', to: 'discounts#show'
@@ -77,7 +71,6 @@ Rails.application.routes.draw do
     get '/', to: 'dashboard#index', as: :dashboard
     get '/merchants/:id', to: 'merchants#show'
     patch '/merchants/:id', to: 'merchants#update'
-    # resources :users, only: [:index, :show]
     get '/users', to: 'users#index'
     get '/users/:id', to: 'users#show'
     patch '/orders/:id/ship', to: 'orders#ship'
